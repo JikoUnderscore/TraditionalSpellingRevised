@@ -1,4 +1,4 @@
-def main():
+def gen():
     with open("./dictionary/TSR.dict", 'r') as f:
 
         with open("./ESR/src/static_map.rs", "w") as fp:
@@ -14,5 +14,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    gen()
 

@@ -1,5 +1,6 @@
+import gen_static_map as gen
 
-def main():
+def add_new_word():
     TSR_dict: dict[str, str] = {}
     with open("./dictionary/TSR.dict", 'r') as f:
         word: str
@@ -32,7 +33,8 @@ def main():
         for k, v in sorter_dict.items():
             f.write(f"{k} {v}\n")
 
+    gen.gen()
 
 if __name__ == '__main__':
-    main()
+    add_new_word()
 

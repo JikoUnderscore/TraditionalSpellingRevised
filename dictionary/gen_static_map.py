@@ -4,7 +4,7 @@ def gen():
         with open("./ESR/src/static_map.rs", "w") as fp:
             fp.write("pub static DICT: phf::Map<&'static str, &'static str> = phf::phf_map! {\n")
             for word in f:
-                kv = word.strip().split()
+                kv = word.strip().split(' ')
                 assert len(kv) == 2
                 # print(kv)
                 fp.write(f'\t"{kv[0]}" => "{kv[1]}",\n')

@@ -5,7 +5,7 @@ def add_new_word():
     with open("./dictionary/TSR.dict", 'r') as f:
         word: str
         for word in f:
-            kv: list[str] = word.strip().split()
+            kv: list[str] = word.strip().split(' ')
 
             assert len(kv) == 2
             TSR_dict[kv[0]] = kv[1]
@@ -13,7 +13,7 @@ def add_new_word():
     with open("./dictionary/new_words", 'r') as f:
         word: str
         for word in f:
-            kv: list[str] = word.lower().strip().split()
+            kv: list[str] = word.lower().strip().split(' ')
             assert len(kv) == 2
 
             key: str

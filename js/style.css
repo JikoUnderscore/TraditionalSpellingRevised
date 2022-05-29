@@ -1,6 +1,5 @@
-
 textarea {
-    display: block;
+    display: flex;
     width: 550px;
     height: 250px;
     padding: 12px 20px;
@@ -11,15 +10,37 @@ textarea {
     font-size: 16px;
 }
 
-.ROW {
-    /*justify-content : center;*/
-    text-align: center;
-    display: inline-block;
+
+.INFO {
+    padding: 10%;
     align-items: center;
+    font-size: 26px;
+    text-align: center;
 }
 
+.pad {
+    padding-right: 50px;
+}
+
+.ROW {
+    padding-top: 100px;
+
+}
+.senter {
+    display: inline-grid;
+    justify-content: center;
+    align-items: center;
+
+}
 
 .text {
-    text-align: center;
+    right: 5px;
+    top: 0;
     font-size: 25px;
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

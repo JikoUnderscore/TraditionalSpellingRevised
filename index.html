@@ -11,31 +11,36 @@
 </head>
 <body>
 
-    <div>
-        <a href="https://github.com/JikoUnderscore/TraditionalSpellingRevised" target="_blank"> <img height="50" width="50" src="./js/github.png" alt="git hub icon"></a>
+    <div >
+        <a class="pad" href="https://github.com/JikoUnderscore/TraditionalSpellingRevised"  target="_blank"> <img height="50" width="50" src="./js/github.png" alt="git hub icon"></a>
+        <p class="senter"> <a href = "https://github.com/JikoUnderscore/TraditionalSpellingRevised/issues"> SUMMING AN ISSUE </a> </p>
+
+        <div class="senter block">
+            <p> <a href = "https://raw.githubusercontent.com/JikoUnderscore/TraditionalSpellingRevised/master/dictionary/TSR.dict"> VIEW CURENT DICTIONARY </a> </p>
+        </div>
 
     </div>
-    <div class="ROW">
-        <p class="text">Input text here</p>
 
-        <textarea class="IN" id="input" rows="5" cols="35">enter your text here</textarea>
-
-<!--            <button onclick="input">Convert</button>-->
-    </div>
-
+    <div class="block">
+        <div class="ROW senter">
+            <div class="text">Input text here</div>
+            <textarea class="IN" id="input" rows="5" cols="35"></textarea>
+        </div>
 
 
-
-    <div class="ROW">
-        <p class="text">Your output goes here</p>
-
-        <textarea class="OUT" readonly id="output" rows="5" cols="35">
+        <div class="ROW senter" >
+            <div class="text">Your output goes here</div>
+            <textarea class="OUT" readonly id="output" rows="5" cols="35">
         </textarea>
+        </div>
+
 
     </div>
+    <div class="INFO">
+        <b>Words that are not found in the dictionary appear with "#".</b>
+    </div>
 
-    <p>INFO:
-        Words that are not found in the dictionaty apear with "#".</p>
+
 
     <script src="./js/dict.js" type="module" ></script>
     <script src="./js/main.js" type="module" ></script>

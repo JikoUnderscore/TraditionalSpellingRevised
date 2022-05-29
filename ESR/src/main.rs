@@ -1,4 +1,6 @@
 #![allow(non_snake_case)]
+#![windows_subsystem = "windows"]
+
 
 use fltk::{app, enums, group, text, window};
 use fltk::group::Pack;

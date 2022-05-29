@@ -16,6 +16,7 @@ def gen():
                 fp.write(f'\t"i" => "I",\n')
                 fp.write("};")
 
+            js.write("\t"[i", "I"],\n")
             js.write("]);")
 
 

@@ -13,7 +13,7 @@ function input() {
 
 
 function translation(text) {
-    let ntext = text.split(" ")
+    let ntext = text.toLowerCase().split(" ")
 
     let new_text = "";
     for (let i = 0; i < ntext.length; i++) {

@@ -20,7 +20,7 @@ def add_new_word():
             value: str
 
             key, value = kv
-            if key in TSR_dict or value in TSR_dict.values():
+            if key in TSR_dict: # or value in TSR_dict.values():
                 print(kv)
                 assert value == TSR_dict[key], f"If it is in the dict. it has to have the same TSR spelling:\n {value} != {TSR_dict[key]}"
                 continue

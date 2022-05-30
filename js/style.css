@@ -13,6 +13,38 @@ textarea {
     resize: none;
 }
 
+header {
+    background-color: #e8efeb;
+    padding: 30px;
+    text-align: end;
+
+    /*font-size: 35px;*/
+    color: white;
+    /*align-items: ;*/
+    /*display: inline-grid;*/
+}
+
+
+.selector:hover {
+    /*background-color: blue;*/
+    color: #051fa6;
+    text-decoration: underline;
+}
+
+.heareds_items {
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    padding: 10px 20px;
+    /*display: grid;*/
+    /*display: inline-grid;*/
+    /*display: block;*/
+    /*padding: 8px 12px;*/
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 18px;
+}
+
 
 .INFO {
     padding: 8%;

@@ -1,23 +1,37 @@
 def gen():
+    TSR_dict: dict[str, str] = {}
     with open("./dictionary/TSR.dict", 'r') as f:
+        word: str
+        for word in f:
+            kv: list[str] = word.strip().split(' ')
 
-        with open("./js/dict.js", "w") as js:
-            js.write("export const DICT = new Map([\n")
+            assert len(kv) == 2
+            TSR_dict[kv[0]] = kv[1]
 
-            with open("./ESR/src/static_map.rs", "w") as fp:
-                fp.write("pub static DICT: phf::Map<&'static str, &'static str> = phf::phf_map! {\n")
-                for word in f:
-                    kv = word.strip().split(' ')
-                    assert len(kv) == 2
-                    # print(kv)
-                    fp.write(f'\t"{kv[0]}" => "{kv[1]}",\n')
-                    js.write(f'\t["{kv[0]}", "{kv[1]}"],\n')
-                fp.write(f'\t" " => " ",\n')
-                fp.write(f'\t"i" => "I",\n')
-                fp.write("};")
+    with open("./dictionary/UNCHANGED.dict", 'r') as f:
+        word: str
+        for word in f:
+            kv: list[str] = word.strip().split(' ')
 
-            js.write('\t["i", "I"],\n')
-            js.write("]);")
+            assert len(kv) == 2
+            TSR_dict[kv[0]] = kv[1]
+
+
+    with open("./js/dict.js", "w") as js:
+        js.write("export const DICT = new Map([\n")
+
+        with open("./ESR/src/static_map.rs", "w") as rs:
+            rs.write("pub static DICT: phf::Map<&'static str, &'static str> = phf::phf_map! {\n")
+
+            for key, value in TSR_dict.items():
+                rs.write(f'\t"{key}" => "{value}",\n')
+                js.write(f'\t["{key}", "{value}"],\n')
+
+            rs.write(f'\t" " => " ",\n')
+            rs.write(f'\t"i" => "I",\n')
+            rs.write("};")
+        js.write('\t["i", "I"],\n')
+        js.write("]);")
 
 
 if __name__ == '__main__':

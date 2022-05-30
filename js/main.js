@@ -19,7 +19,7 @@ function translation(text) {
         let got = DICT.get(ntext[i])
         if (got === undefined) {
             if (ntext[i] !== "") {
-                new_text += " <span style=\"color: #e83939;\">" + ntext[i] + "</span>"; // red are unconfurmed words
+                new_text += " <span style=\"color: #fa0000;\">" + ntext[i] + "</span>"; // red are unconfurmed words
             }
         } else {
             if (got === ntext[i]) {

@@ -12,17 +12,24 @@ function input() {
 
 
 function translation(text) {
-    let ntext = text.toLowerCase().split(" ")
+    const punct = "'!@#█½-$%’'^&*( '){}[]¿|._-\`/?:;«»‹›—\,“”~";
+
+    for (const pun of punct) {
+        text = text.replace(pun, " " + pun);
+    }
+
+
+    let ntext = text.toLowerCase().split(" ");
 
     let new_text = "";
-    for (let i = 0; i < ntext.length; i++) {
-        let got = DICT.get(ntext[i])
+    for (let word of ntext) {
+        let got = DICT.get(word)
         if (got === undefined) {
-            if (ntext[i] !== "") {
-                new_text += " <span style=\"color: #fa0000;\">" + ntext[i] + "</span>"; // red are unconfurmed words
+            if (word !== "") {
+                new_text += " <span style=\"color: #fa0000;\">" + word + "</span>"; // red are unconfurmed words
             }
         } else {
-            if (got === ntext[i]) {
+            if (got === word) {
                 new_text += " " + got; // black comfured words with no change of spelling
             } else {
                 new_text += " <span style=\"color: #5a65a8;\">" + got + "</span>"; // blue comfurmed word with changed spelling

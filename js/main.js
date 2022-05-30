@@ -1,14 +1,13 @@
-import { DICT } from "./dict.js";
+import {DICT} from "./dict.js";
 
 const text_box_input = document.getElementById("input");
-let text_output = document.getElementById("output");
 
 text_box_input.addEventListener('input', input, false);
 
-function input() {
-    console.log("thiss is a cat");
-    text_output.value = translation(text_box_input.value);
+let div = document.getElementById('TEST');
 
+function input() {
+    div.innerHTML = translation(text_box_input.value);
 }
 
 
@@ -17,15 +16,17 @@ function translation(text) {
 
     let new_text = "";
     for (let i = 0; i < ntext.length; i++) {
-        console.log("ntext[i]", ntext[i]);
-
         let got = DICT.get(ntext[i])
-        if (got === undefined){
-            if (ntext[i] !== ""){
-                new_text += " #" + ntext[i] + "#";
+        if (got === undefined) {
+            if (ntext[i] !== "") {
+                new_text += " <span style=\"color: #e83939;\">" + ntext[i] + "</span>"; // red are unconfurmed words
             }
         } else {
-            new_text += " " + got;
+            if (got === ntext[i]) {
+                new_text += " " + got; // black comfured words with no change of spelling
+            } else {
+                new_text += " <span style=\"color: #5a65a8;\">" + got + "</span>"; // blue comfurmed word with changed spelling
+            }
         }
     }
 

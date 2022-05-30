@@ -2,7 +2,7 @@ def gen():
     with open("./dictionary/TSR.dict", 'r') as f:
 
         with open("./js/dict.js", "w") as js:
-            js.write("const DICT = new Map([\n")
+            js.write("export const DICT = new Map([\n")
 
             with open("./ESR/src/static_map.rs", "w") as fp:
                 fp.write("pub static DICT: phf::Map<&'static str, &'static str> = phf::phf_map! {\n")

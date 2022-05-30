@@ -7,15 +7,16 @@ textarea {
     border: 2px solid #ccc;
     border-radius: 4px;
     background-color: #f8f8f8;
-    font-size: 16px;
+    font-size: 15px;
+    resize: none;
 }
 
 
 .INFO {
-    padding: 10%;
-    align-items: center;
+    padding: 8%;
     font-size: 26px;
     text-align: center;
+
 }
 
 .pad {
@@ -26,6 +27,7 @@ textarea {
     padding-top: 100px;
 
 }
+
 .senter {
     display: inline-grid;
     justify-content: center;
@@ -43,4 +45,16 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#TEST {
+    width: 550px;
+    height: 250px;
+    white-space: pre-line;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 20px;
 }

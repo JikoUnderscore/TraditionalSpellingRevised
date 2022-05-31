@@ -22,6 +22,55 @@
 </header>
 
 <body>
-<input type="text" name="new word " id="newword">
+
+<input type="text" name="new word " id="new_input">
+<input type="text"  id="tsr_word">
+<button id="button_get_site">button_get_site</button>
+<button id="add_tsr_word">add_tsr_word</button>
+<div id="new_words"></div>
+
+
+<h2>CONSTRUCTUION UNDER WAY</h2>
+<iframe id="other_site" src="http://cube.elte.hu/index.pl?s=help&fullw=on&t=&syllcount=&maxout=&wfreq=0-9&grammar=" height="500px" width="500px"></iframe>
+<div id="words"></div>
+<script>
+    let web_site = document.getElementById("other_site");
+    let input_field = document.getElementById("new_input");
+    const button_get_site = document.getElementById("button_get_site");
+    let tsr_word = document.getElementById("tsr_word");
+    const button_tsr_word = document.getElementById("add_tsr_word");
+    const div_new_words = document.getElementById("new_words");
+
+
+    function get_new_site() {
+        const s = `http://cube.elte.hu/index.pl?s=${input_field.value}&fullw=on&t=&syllcount=&maxout=&wfreq=0-9&grammar=`;
+        web_site.setAttribute("src", s);
+
+    }
+
+    function add_new_word(){
+        const new_row = `${input_field.value} ${tsr_word.value}\n`;
+
+        div_new_words.innerHTML += new_row;
+        input_field.value = "";
+        tsr_word.value = "";
+    }
+
+    button_get_site.onclick = get_new_site;
+
+    button_tsr_word.onclick = add_new_word;
+
+    document.onkeydown = function (e) {
+        if (e.code === "Enter"){
+            get_new_site();
+        } else  if (e.code === "ShiftLeft"){
+            add_new_word();
+            input_field.focus()
+        }
+    };
+
+
+
+</script>
 </body>
 </html>

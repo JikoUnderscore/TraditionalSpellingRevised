@@ -4,7 +4,7 @@ const text_box_input = document.getElementById("input");
 
 text_box_input.addEventListener('input', input, false);
 
-let div = document.getElementById('TEST');
+let div = document.getElementById('out_put');
 
 function input() {
     div.innerHTML = translation(text_box_input.value);

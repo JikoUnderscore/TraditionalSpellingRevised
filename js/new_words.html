@@ -31,7 +31,7 @@
 
 
 <h2>CONSTRUCTUION UNDER WAY</h2>
-<iframe id="other_site" src="http://cube.elte.hu/index.pl?s=help&fullw=on&t=&syllcount=&maxout=&wfreq=0-9&grammar=" height="500px" width="500px"></iframe>
+<iframe id="other_site" src="https://cube.elte.hu/index.pl?s=help&fullw=on&t=&syllcount=&maxout=&wfreq=0-9&grammar=" height="500px" width="500px"></iframe>
 <div id="words"></div>
 <script>
     let web_site = document.getElementById("other_site");
@@ -43,7 +43,7 @@
 
 
     function get_new_site() {
-        const s = `http://cube.elte.hu/index.pl?s=${input_field.value}&fullw=on&t=&syllcount=&maxout=&wfreq=0-9&grammar=`;
+        const s = `https://cube.elte.hu/index.pl?s=${input_field.value}&fullw=on&t=&syllcount=&maxout=&wfreq=0-9&grammar=`;
         web_site.setAttribute("src", s);
 
     }

@@ -7,9 +7,9 @@ pub fn convert(input_text: &str) -> String {
     for word in input_text.split(' ') {
         match DICT.get(word) {
             None => {
-                result.push_str(" #");
+                result.push_str(" ");
                 result.push_str(word);
-                result.push_str("#");
+                // result.push_str("#");
             },
             Some(t) => {
                 result.push_str(" ");

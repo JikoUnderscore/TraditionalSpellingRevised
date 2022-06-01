@@ -1,3 +1,4 @@
+use fltk::text::TextBuffer;
 use crate::static_map::DICT;
 
 pub fn convert(input_text: &str) -> String {
@@ -21,3 +22,23 @@ pub fn convert(input_text: &str) -> String {
     return result;
 }
 
+pub fn change_color(text: &str, style_buff_ref: &mut TextBuffer){
+    for word in text.split(" ") {
+        match DICT.get(word) {
+            None => {
+                style_buff_ref.append(" ");
+                style_buff_ref.append(&"B".repeat(word.len()));
+            },
+            Some(&reformed_word) => {
+                if reformed_word == word {
+                    debug_assert_eq!(reformed_word.len(), word.len());
+                    style_buff_ref.append(" ");
+                    style_buff_ref.append(&"A".repeat(reformed_word.len()));
+                } else {
+                    style_buff_ref.append(" ");
+                    style_buff_ref.append(&"C".repeat(reformed_word.len()));
+                }
+            },
+        }
+    }
+}

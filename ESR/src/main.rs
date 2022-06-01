@@ -6,7 +6,7 @@ use fltk::{app, enums, group, text, window};
 use fltk::group::Pack;
 use fltk::prelude::{WidgetBase, GroupExt, WidgetExt, DisplayExt, WindowExt};
 use fltk::text::TextBuffer;
-use crate::process::convert;
+use crate::process::{change_color, convert};
 
 mod process;
 mod static_map;
@@ -43,24 +43,24 @@ fn main() {
     root.show();
 
     let styles = vec![
-        text::StyleTableEntry {
+        text::StyleTableEntry {                                // A
             color: enums::Color::from_rgb(0, 0, 0),
             font: enums::Font::HelveticaBold,
             size: 14
         },
-        text::StyleTableEntry {
+        text::StyleTableEntry {                                 // B
             color: enums::Color::from_rgb(255, 0, 0),
             font: enums::Font::HelveticaBold,
             size: 14
         },
-        text::StyleTableEntry {
+        text::StyleTableEntry {                                 // C
             color: enums::Color::from_rgb(0, 0, 255),
             font: enums::Font::HelveticaBold,
             size: 14
         },
     ];
-    out_textbox.set_highlight_data(out_textbox.buffer(), styles);
 
+    out_textbox.set_highlight_data(TextBuffer::default(), styles);
 
     root.handle(move |_, e| {
         if e == enums::Event::Shortcut && app::event_key() == enums::Key::Escape {
@@ -70,45 +70,21 @@ fn main() {
     });
 
     input_textbox.set_callback({
-        out_textbox.clear_changed();
         let mut out_buff = out_textbox.buffer();
+        let mut style_buff_ = out_textbox.style_buffer();
 
-        move |e| {
-            let text = e.buffer().unwrap().text();
-            // println!("{:?}", text);
+        move |input_te| {
+            let text = input_te.buffer().unwrap().text().to_lowercase();
 
-            let buf = out_buff.as_mut().unwrap();
-            let onverter_text = convert(&text.to_lowercase());
-            buf.set_text(onverter_text.as_str());
-        }
-    });
+            let out_text = out_buff.as_mut().unwrap();
+            let converted_input_text = convert(&text.to_lowercase());
 
-    out_textbox.buffer().unwrap().add_modify_callback({
-        let mut curent_output_text = out_textbox.buffer().clone();
+            out_text.set_text(converted_input_text.as_str());
 
+            let style_buff_ref = style_buff_.as_mut().unwrap();
+            style_buff_ref.set_text("");
 
-        move |pos: i32, n_inserted_chars: i32, n_deleted_chars: i32, n_restyled_chars: i32, deleted_text: &str| {
-            if n_inserted_chars == 0 && n_deleted_chars == 0 {
-                println!("here");
-                return;
-            }
-            let textbuff = curent_output_text.as_mut().unwrap();
-
-            dbg!(textbuff.text());
-            dbg!(textbuff.text_range(textbuff.line_start(pos), textbuff.word_end(pos + n_inserted_chars - n_deleted_chars)));
-
-            println!("___________");
-
-            let new_buff = TextBuffer::default();
-
-            textbuff.highlight(pos, n_inserted_chars / 2);
-
-
-            dbg!(pos);
-            dbg!(n_inserted_chars);
-            dbg!(n_deleted_chars);
-            dbg!(n_restyled_chars);
-            dbg!(deleted_text);
+            change_color(&text, style_buff_ref);
         }
     });
 

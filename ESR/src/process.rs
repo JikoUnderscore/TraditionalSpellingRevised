@@ -22,7 +22,7 @@ pub fn convert(input_text: &str) -> String {
     return result;
 }
 
-pub fn change_color(text: &str, style_buff_ref: &mut TextBuffer){
+pub fn change_color(text: &str, style_buff_ref: &mut TextBuffer) {
     for word in text.split(" ") {
         match DICT.get(word) {
             None => {
@@ -41,4 +41,25 @@ pub fn change_color(text: &str, style_buff_ref: &mut TextBuffer){
             },
         }
     }
+}
+
+
+pub fn web_scpaker(string: &str) -> Result<String, Box<dyn std::error::Error>> {
+    let url = format!("http://cube.elte.hu/index.pl?s={}&fullw=on&t=&syllcount=&maxout=&wfreq=0-9&grammar=", string);
+    let text = reqwest::blocking::get(url)?
+        .text()?;
+
+
+    let parsed_html = scraper::Html::parse_document(&text);
+
+    let selector = scraper::Selector::parse("span.ipa").unwrap();
+
+    let span_text = parsed_html
+        .select(&selector)
+        .flat_map(|el| el.text())
+        .collect::<Vec<_>>();
+
+    let ret = span_text.join("\n");
+
+    return Ok(ret);
 }

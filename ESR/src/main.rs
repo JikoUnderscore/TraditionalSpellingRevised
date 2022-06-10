@@ -26,7 +26,9 @@ fn main() {
     const ROW: i32 = 50 + HERDER_Y;
 
     let mut help_button = button::Button::new(WIN_W - 200, 20, 200, 30, "Help add new words!");
-
+    frame::Frame::new(-200, -20, 200, ROW, None)
+        .with_align(enums::Align::Right)
+        .with_label("Words that are black are confirmed words with no change of spelling.\nWords that are red are unconfirmed words.\nWords that are blue are confirmed words with changed spelling ");
 
     let mut vpack = Pack::new(0, ROW, WIN_W / 2, WIN_H - ROW, "");
     let mut input_textbox = text::TextEditor::new(0, 0, WIN_W / 2, WIN_H, "Enter Text Below:");
@@ -115,7 +117,7 @@ fn setup_help_window(help_button: &mut button::Button) {
     const ROW_1: i32 = 20;
 
     let mut show_webscraped_data = button::ReturnButton::new(550, ROW_1, 100, 50, "Show IPA");
-    let mut save_to_output_button = button::Button::new(TOP_WINDOW_W / 2 , 150, 100, 50, "Pun in output");
+    let mut save_to_output_button = button::Button::new(TOP_WINDOW_W / 2, 150, 100, 50, "Pun in output");
 
     let mut t = input::Input::new(200, ROW_1, 100, 50, "TS word*");
     t.set_tooltip("Enter the normal spelling of a English word");

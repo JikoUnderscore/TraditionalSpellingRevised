@@ -1,10 +1,6 @@
 use fltk::text::TextBuffer;
 use crate::static_map::DICT;
 
-#[macro_export]
-macro_rules! not {
-    ($x:expr) => {!$x};
-}
 
 pub fn convert(input_text: &str) -> String {
     if input_text.is_empty() { return "".to_string(); }
@@ -15,13 +11,13 @@ pub fn convert(input_text: &str) -> String {
     for word in input_text.split(' ') {
         match DICT.get(word) {
             None => {
-                if not!(last_word == "\n") {
+                if last_word != "\n" {
                     result.push_str(" ");
                 }
                 result.push_str(word);
             },
             Some(t) => {
-                if not!(last_word == "\n") {
+                if last_word != "\n" {
                     result.push_str(" ");
                 }
                 result.push_str(t);
@@ -40,19 +36,19 @@ pub fn change_color(text: &str, style_buff_ref: &mut TextBuffer) {
     for word in text.split(" ") {
         match DICT.get(word) {
             None => {
-                if not!(last_word == "\n") {
+                if last_word != "\n" {
                     style_buff_ref.append(" ");
                 }
                 style_buff_ref.append(&"B".repeat(word.len()))
             },
             Some(&reformed_word) => {
                 if reformed_word == word {
-                    if not!(last_word == "\n") {
+                    if last_word != "\n" {
                         style_buff_ref.append(" ");
                     }
                     style_buff_ref.append(&"A".repeat(reformed_word.len()));
                 } else {
-                    if not!(last_word == "\n") {
+                    if last_word != "\n" {
                         style_buff_ref.append(" ");
                     }
                     style_buff_ref.append(&"C".repeat(reformed_word.len()));

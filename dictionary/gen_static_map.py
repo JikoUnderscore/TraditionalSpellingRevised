@@ -1,6 +1,6 @@
 def gen():
     TSR_dict: dict[str, str] = {}
-    with open("./dictionary/TSR.dict", 'r') as f:
+    with open("./dictionary/TSR.dict", 'r', encoding="utf8") as f:
         word: str
         for word in f:
             kv: list[str] = word.strip().split(' ')
@@ -8,7 +8,7 @@ def gen():
             assert len(kv) == 2
             TSR_dict[kv[0]] = kv[1]
 
-    with open("./dictionary/UNCHANGED.dict", 'r') as f:
+    with open("./dictionary/UNCHANGED.dict", 'r', encoding="utf8") as f:
         word: str
         for word in f:
             kv: list[str] = word.strip().split(' ')
@@ -17,10 +17,10 @@ def gen():
             TSR_dict[kv[0]] = kv[1]
 
 
-    with open("./js/dict.js", "w") as js:
+    with open("./js/dict.js", "w", encoding="utf8") as js:
         js.write("export const DICT = new Map([\n")
 
-        with open("./ESR/src/static_map.rs", "w") as rs:
+        with open("./ESR/src/static_map.rs", "w", encoding="utf8") as rs:
             rs.write("pub static DICT: phf::Map<&'static str, &'static str> = phf::phf_map! {\n")
 
             for key, value in TSR_dict.items():

@@ -2,7 +2,7 @@ import gen_static_map as gen
 
 def add_new_word():
     TSR_dict: dict[str, str] = {}
-    with open("./dictionary/TSR.dict", 'r') as f:
+    with open("./dictionary/TSR.dict", 'r', encoding="utf8") as f:
         word: str
         for word in f:
             kv: list[str] = word.strip().split(' ')
@@ -10,7 +10,7 @@ def add_new_word():
             assert len(kv) == 2
             TSR_dict[kv[0]] = kv[1]
 
-    with open("./dictionary/UNCHANGED.dict", 'r') as f:
+    with open("./dictionary/UNCHANGED.dict", 'r', encoding="utf8") as f:
         word: str
         for word in f:
             kv: list[str] = word.strip().split(' ')
@@ -18,7 +18,7 @@ def add_new_word():
             assert len(kv) == 2
             TSR_dict[kv[0]] = kv[1]
 
-    with open("./dictionary/new_words", 'r') as f:
+    with open("./dictionary/new_words", 'r', encoding="utf8") as f:
         word: str
         for word in f:
             kv: list[str] = word.lower().strip().split(' ')
@@ -35,8 +35,8 @@ def add_new_word():
 
             TSR_dict[key] = value
 
-    with open("./dictionary/UNCHANGED.dict", 'w') as unf:
-        with open("./dictionary/TSR.dict", 'w') as tsrf:
+    with open("./dictionary/UNCHANGED.dict", 'w', encoding="utf8") as unf:
+        with open("./dictionary/TSR.dict", 'w', encoding="utf8") as tsrf:
             sorter_dict: dict[str, str] = dict(sorted(TSR_dict.items().__iter__()))
 
             for k, v in sorter_dict.items():

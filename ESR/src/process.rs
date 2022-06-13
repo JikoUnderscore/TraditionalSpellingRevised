@@ -1,6 +1,11 @@
 use fltk::text::TextBuffer;
 use crate::static_map::DICT;
 
+#[macro_export]
+macro_rules! not {
+    ($x:expr) => {!$x};
+}
+
 pub fn convert(input_text: &str) -> String {
     if input_text.is_empty() { return "".to_string(); }
     let input_text = input_text.replace("\n", " \n ");
@@ -10,20 +15,16 @@ pub fn convert(input_text: &str) -> String {
     for word in input_text.split(' ') {
         match DICT.get(word) {
             None => {
-                if last_word == "\n" {
-                    result.push_str(word);
-                } else {
+                if not!(last_word == "\n") {
                     result.push_str(" ");
-                    result.push_str(word);
                 }
+                result.push_str(word);
             },
             Some(t) => {
-                if last_word == "\n" {
-                    result.push_str(t);
-                } else {
+                if not!(last_word == "\n") {
                     result.push_str(" ");
-                    result.push_str(t);
                 }
+                result.push_str(t);
             },
         }
         last_word = word;
@@ -39,28 +40,22 @@ pub fn change_color(text: &str, style_buff_ref: &mut TextBuffer) {
     for word in text.split(" ") {
         match DICT.get(word) {
             None => {
-                if last_word == "\n" {
-                    style_buff_ref.append(&"B".repeat(word.len()))
-                } else {
+                if not!(last_word == "\n") {
                     style_buff_ref.append(" ");
-                    style_buff_ref.append(&"B".repeat(word.len()))
                 }
+                style_buff_ref.append(&"B".repeat(word.len()))
             },
             Some(&reformed_word) => {
                 if reformed_word == word {
-                    if last_word == "\n" {
-                        style_buff_ref.append(&"A".repeat(reformed_word.len()));
-                    } else {
+                    if not!(last_word == "\n") {
                         style_buff_ref.append(" ");
-                        style_buff_ref.append(&"A".repeat(reformed_word.len()));
                     }
+                    style_buff_ref.append(&"A".repeat(reformed_word.len()));
                 } else {
-                    if last_word == "\n" {
-                        style_buff_ref.append(&"C".repeat(reformed_word.len()));
-                    } else {
+                    if not!(last_word == "\n") {
                         style_buff_ref.append(" ");
-                        style_buff_ref.append(&"C".repeat(reformed_word.len()));
                     }
+                    style_buff_ref.append(&"C".repeat(reformed_word.len()));
                 }
             },
         }
@@ -90,3 +85,4 @@ pub fn web_scpaker(string: &str) -> anyhow::Result<String> {
 
     return Ok(span_text.join("\n"));
 }
+

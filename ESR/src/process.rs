@@ -4,7 +4,7 @@ use crate::static_map::DICT;
 
 pub fn convert(input_text: &str) -> String {
     if input_text.is_empty() { return "".to_string(); }
-    let input_text = input_text.replace("\n", " \n ");
+    let input_text = input_text.replace('\n', " \n ");
 
     let mut result = String::new();
     let mut last_word = "\n";
@@ -12,13 +12,13 @@ pub fn convert(input_text: &str) -> String {
         match DICT.get(word) {
             None => {
                 if last_word != "\n" {
-                    result.push_str(" ");
+                    result.push(' ');
                 }
                 result.push_str(word);
             },
             Some(t) => {
                 if last_word != "\n" {
-                    result.push_str(" ");
+                    result.push(' ');
                 }
                 result.push_str(t);
             },
@@ -30,10 +30,10 @@ pub fn convert(input_text: &str) -> String {
 }
 
 pub fn change_color(text: &str, style_buff_ref: &mut TextBuffer) {
-    let text = text.replace("\n", " \n ");
+    let text = text.replace('\n', " \n ");
 
     let mut last_word = "\n";
-    for word in text.split(" ") {
+    for word in text.split(' ') {
         match DICT.get(word) {
             None => {
                 if last_word != "\n" {

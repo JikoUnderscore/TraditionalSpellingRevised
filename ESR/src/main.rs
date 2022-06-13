@@ -1,5 +1,6 @@
 #![allow(non_snake_case)]
 #![windows_subsystem = "windows"]
+#![allow(clippy::needless_return)]
 
 
 use std::rc::Rc;
@@ -140,11 +141,10 @@ fn setup_help_window(help_button: &mut button::Button) {
 
 
     show_webscraped_data.set_callback({
-        let input_ref = input_box.clone();
 
         move |_| {
             let lable_ref = lable.clone();
-            let input = input_ref.as_ref().value();
+            let input = input_box.as_ref().value();
 
             {
                 let mut lock = lable_ref.lock().unwrap();

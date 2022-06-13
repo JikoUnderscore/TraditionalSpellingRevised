@@ -18,26 +18,37 @@ function translation(text) {
         text = text.replace(pun, " " + pun);
     }
 
+    text = text.replaceAll("\n", " \n ");
 
     let ntext = text.toLowerCase().split(" ");
 
+    let last_word = "\n";
     let new_text = "";
-    for (let word of ntext) {
-        console.log(word.raw());
 
+    console.log(ntext);
+    for (let word of ntext) {
         let got = DICT.get(word)
         if (got === undefined) {
             if (word !== "") {
-
-                new_text += " <span style=\"color: #fa0000;\">" + word + "</span>"; // red are unconfurmed words
+                if (last_word !== "\n"){
+                    new_text += " ";
+                }
+                new_text += "<span style=\"color: #fa0000;\">" + word + "</span>"; // red are unconfurmed words
             }
         } else {
             if (got === word) {
-                new_text += " " + got; // black comfured words with no change of spelling
+                if (last_word !== "\n"){
+                    new_text += " ";
+                }
+                new_text += got; // black comfured words with no change of spelling
             } else {
-                new_text += " <span style=\"color: #5a65a8;\">" + got + "</span>"; // blue comfurmed word with changed spelling
+                if (last_word !== "\n"){
+                    new_text += " ";
+                }
+                new_text += "<span style=\"color: #5a65a8;\">" + got + "</span>"; // blue comfurmed word with changed spelling
             }
         }
+        last_word = word;
     }
 
 

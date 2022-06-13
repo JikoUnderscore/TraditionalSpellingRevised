@@ -23,9 +23,12 @@ function translation(text) {
 
     let new_text = "";
     for (let word of ntext) {
+        console.log(word.raw());
+
         let got = DICT.get(word)
         if (got === undefined) {
             if (word !== "") {
+
                 new_text += " <span style=\"color: #fa0000;\">" + word + "</span>"; // red are unconfurmed words
             }
         } else {

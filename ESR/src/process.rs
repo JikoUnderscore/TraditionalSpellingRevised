@@ -3,43 +3,68 @@ use crate::static_map::DICT;
 
 pub fn convert(input_text: &str) -> String {
     if input_text.is_empty() { return "".to_string(); }
-    let mut result = String::new();
+    let input_text = input_text.replace("\n", " \n ");
 
+    let mut result = String::new();
+    let mut last_word = "\n";
     for word in input_text.split(' ') {
         match DICT.get(word) {
             None => {
-                result.push_str(" ");
-                result.push_str(word);
-                // result.push_str("#");
+                if last_word == "\n" {
+                    result.push_str(word);
+                } else {
+                    result.push_str(" ");
+                    result.push_str(word);
+                }
             },
             Some(t) => {
-                result.push_str(" ");
-                result.push_str(t);
+                if last_word == "\n" {
+                    result.push_str(t);
+                } else {
+                    result.push_str(" ");
+                    result.push_str(t);
+                }
             },
         }
+        last_word = word;
     }
 
     return result;
 }
 
 pub fn change_color(text: &str, style_buff_ref: &mut TextBuffer) {
+    let text = text.replace("\n", " \n ");
+
+    let mut last_word = "\n";
     for word in text.split(" ") {
         match DICT.get(word) {
             None => {
-                style_buff_ref.append(" ");
-                style_buff_ref.append(&"B".repeat(word.len()));
+                if last_word == "\n" {
+                    style_buff_ref.append(&"B".repeat(word.len()))
+                } else {
+                    style_buff_ref.append(" ");
+                    style_buff_ref.append(&"B".repeat(word.len()))
+                }
             },
             Some(&reformed_word) => {
                 if reformed_word == word {
-                    debug_assert_eq!(reformed_word.len(), word.len());
-                    style_buff_ref.append(" ");
-                    style_buff_ref.append(&"A".repeat(reformed_word.len()));
+                    if last_word == "\n" {
+                        style_buff_ref.append(&"A".repeat(reformed_word.len()));
+                    } else {
+                        style_buff_ref.append(" ");
+                        style_buff_ref.append(&"A".repeat(reformed_word.len()));
+                    }
                 } else {
-                    style_buff_ref.append(" ");
-                    style_buff_ref.append(&"C".repeat(reformed_word.len()));
+                    if last_word == "\n" {
+                        style_buff_ref.append(&"C".repeat(reformed_word.len()));
+                    } else {
+                        style_buff_ref.append(" ");
+                        style_buff_ref.append(&"C".repeat(reformed_word.len()));
+                    }
                 }
             },
         }
+        last_word = word;
     }
 }
 
@@ -48,7 +73,6 @@ pub fn web_scpaker(string: &str) -> anyhow::Result<String> {
     let url = format!("http://cube.elte.hu/index.pl?s={}&fullw=on&t=&syllcount=&maxout=&wfreq=0-9&grammar=", string);
     let text = reqwest::blocking::get(url)?
         .text()?;
-
 
     let parsed_html = scraper::Html::parse_document(&text);
 
